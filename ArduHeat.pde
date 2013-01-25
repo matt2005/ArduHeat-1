@@ -23,7 +23,7 @@ DateTime now;
  #include <Wire.h>
  #include <LiquidCrystal_I2C.h>
  #define BACKLIGHT_PIN 3
- LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7); // Set the LCD I2C address 
+ LiquidCrystal_I2C lcd(0x27, 3, 1, 0, 4, 5, 6, 7); // Set the LCD I2C address 
  //LiquidCrystal_I2C lcd(0x27, BACKLIGHT_PIN, POSITIVE);// Set the LCD I2C address 
  
  // Addition for ir receiver
@@ -618,7 +618,6 @@ lcd.backlight (); delay (1000); lcd.noBacklight();
   // Switch on the backlight
  
   
-  lcd.begin(16,2);               // initialize the lcd 
 
   lcd.home ();                   // go home
   lcd.print("HEAT    012345678");  
