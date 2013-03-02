@@ -8,11 +8,26 @@
 //          : 
 //****************************************************************
 
+//**************************************************************
+//  Name    : Heat Controler
+//  Author  : Vladimir Dragovic <vladimird@t-com.me>
+//  Date    : 20/01/2013
+//  Modified: 24/02/2013
+//  Version : 0.81
+//  Notes   : 
+//          : 
+//****************************************************************
+#define ver 0.81
+#define datum "02/03/13"
+
+
+
 #include <EEPROM.h> // For saving the schedule
 
 #include <SPI.h>
 #include <Ethernet.h>
 //#include <EthernetDHCP.h> // http://gkaindl.com/software/arduino-ethernet
+//Removed DHCP as not neded
 
 #include <Wire.h>
 #include "RTClib.h" // https://github.com/adafruit/RTClib
@@ -70,7 +85,7 @@ String command;
 typedef struct {
   byte deleted;
   byte enabled;
-  byte days; // 1 = Everyday, 2=Even Days, 3=Odd Days
+  byte days; // 1 = Everyday, 2=Even Days, 3=Odd Days- Modified to 1-7 days of week ,8 every day ,9 working day,10 Weekend
   byte hour; // 0 - 23
   byte minute; // 0 - 59
   byte zone; // 0 - 8
@@ -620,7 +635,11 @@ lcd.backlight (); delay (1000); lcd.noBacklight();
   
 
   lcd.home ();                   // go home
-  lcd.print("HEAT    012345678");  
+  lcd.print("HEAT");
+  lcd.print(ver);
+  //lcd.print(" ");
+  lcd.print(datum); 
+  
   lcd.setCursor ( 0, 1 );        // go to the next line
   lcd.print (" Welcome");
   delay ( 1000 );
@@ -696,7 +715,7 @@ void loop() {
     lcd.setCursor ( 0, 1 );        // go to the next line
     //lcd.print(now.year(), DEC);
     //lcd.print('/');
-    lcd.print ("CET");
+    lcd.print ("SAD");
     lcd.print(now.day(), DEC);
     lcd.print('/');
     lcd.print(now.month(), DEC);
