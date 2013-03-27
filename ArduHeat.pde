@@ -24,7 +24,7 @@
 // Change log
 //0.82 03.03.2013
 // Added support for One wire Temperature
-// Print su Serial, LCD , Telnet with time
+// Print to Serial, LCD , Telnet with time
 
 //
 #include <OneWire.h> // onewire DS18B20 
@@ -306,6 +306,8 @@ void e_printTime() {
     client.print("0");
   }
   client.print(now.second(), DEC);
+  client.print(' Temp:');
+  client.print(temperature,DEC);
 }
 
 void e_printUptime() {
@@ -627,7 +629,8 @@ Serial.println("*RESET*");
 // LCD Init
 lcd.begin(16,2); // initialize the lcd 
 lcd.setBacklightPin ( 3, POSITIVE );
-lcd.backlight (); delay (1000); lcd.noBacklight();
+lcd.backlight (); delay (1000);
+//lcd.noBacklight();
 
 // Ir receiver init
  irrecv.enableIRIn(); // Start the receiver
@@ -705,6 +708,7 @@ void loop() {
     now = RTC.now();
     temperature=temp(1);
     Serial.print(temperature, DEC);
+    Serial.println('Temperatura Sensora');
     Serial.print(now.year(), DEC);
     Serial.print('/');
     Serial.print(now.month(), DEC);
